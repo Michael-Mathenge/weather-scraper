@@ -72,7 +72,8 @@
 
 					<button id="findMyWeather" class="btn btn-success btn-lg">Find my weather</button>
 
-					<div class="alert alert-success">success!</div>
+					<div id="success" class="alert alert-success">success!</div>
+					<div id="fail" class="alert alert-danger">no such area!</div>
 				</form>
 
 			</div>
@@ -98,7 +99,18 @@
 
 				$.get("scraper.php?city="+$("#city").val(), function(data){
 
-					$(".alert").html(data).fadeIn();
+					$("#success").html(data).fadeIn();
+
+					if (data=="") {
+
+						$("#success").hide();
+						$("#fail").fadeIn();
+
+					} else {
+
+						$("#fail").hide();
+						$("#success").html(data).fadeIn();
+					}
 
 				});
 
